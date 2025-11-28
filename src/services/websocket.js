@@ -6,7 +6,9 @@ class WebSocketService {
   }
 
   connect(roomCode) {
-    this.socket = new WebSocket(`ws://localhost:8000/ws/game/${roomCode}/`);
+    // Dynamically set WebSocket URL
+    const WS_BASE_URL = process.env.REACT_APP_WS_URL || 'ws://localhost:8000';
+    this.socket = new WebSocket(`${WS_BASE_URL}/ws/game/${roomCode}/`);
     
     this.socket.onopen = () => {
       console.log('WebSocket connected');
